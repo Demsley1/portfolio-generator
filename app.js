@@ -1,14 +1,52 @@
 const inquirer = require("inquirer");
-/*const fs = require('fs');
+const fs = require('fs');
 const generatePage = require("./src/page-template.js")
 
-const pageHTML = generatePage(names, github);
-
-fs.writeFile('./index.html', pageHTML, err => {
-  if (err) throw new Error(err);
-
-  console.log('Portfolio complete! Check out index.html to see the output!');
-});*/
+const mockData = {
+  name: 'Lernantino',
+  github: 'lernantino',
+  confirmAbout: true,
+  about:
+    'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et.',
+  projects: [
+    {
+      name: 'Run Buddy',
+      description:
+        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
+      languages: ['HTML', 'CSS'],
+      link: 'https://github.com/lernantino/run-buddy',
+      feature: true,
+      confirmAddProject: true
+    },
+    {
+      name: 'Taskinator',
+      description:
+        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
+      languages: ['JavaScript', 'HTML', 'CSS'],
+      link: 'https://github.com/lernantino/taskinator',
+      feature: true,
+      confirmAddProject: true
+    },
+    {
+      name: 'Taskmaster Pro',
+      description:
+        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque. Nulla eget fringilla nulla. Integer gravida magna mi, id efficitur metus tempus et. Nam fringilla elit dapibus pellentesque cursus.',
+      languages: ['JavaScript', 'jQuery', 'CSS', 'HTML', 'Bootstrap'],
+      link: 'https://github.com/lernantino/taskmaster-pro',
+      feature: false,
+      confirmAddProject: true
+    },
+    {
+      name: 'Robot Gladiators',
+      description:
+        'Duis consectetur nunc nunc. Morbi finibus non sapien nec pharetra. Fusce nec dignissim orci, ac interdum ipsum. Morbi mattis justo sed commodo pellentesque.',
+      languages: ['JavaScript'],
+      link: 'https://github.com/lernantino/robot-gladiators',
+      feature: false,
+      confirmAddProject: false
+    }
+  ]
+};
 
 const promptUser = () => {
   return inquirer.prompt ([
@@ -28,7 +66,7 @@ const promptUser = () => {
     },
     {
       type: 'input',
-      name: 'GitHub username',
+      name: 'username',
       message: 'Enter your GitHub Username',
       validate: githubname => {
         if (githubname) {
@@ -74,7 +112,7 @@ Add a New Project
   return inquirer.prompt([
     {
       type: 'input',
-      name: 'Project name',
+      name: 'name',
       message: 'What is the name of your project?',
       validate: projectname => {
         if (projectname) {
@@ -88,7 +126,7 @@ Add a New Project
     },
     {
       type: 'input',
-      name: 'Project description',
+      name: 'description',
       message: 'Provide a description of the project (Required)',
       validate: projectdescription => {
         if (projectdescription) {
@@ -108,7 +146,7 @@ Add a New Project
     },
     {
       type: 'input',
-      name: 'Project GitHub link',
+      name: 'link',
       message: 'Enter the GitHub link to your project. (Required)',
       validate: githublink => {
         if (githublink) {
@@ -142,8 +180,21 @@ Add a New Project
   });
 };
 
-promptUser()
+const pageHTML = generatePage(mockData);
+fs.writeFile('./index.html', pageHTML, err => {
+  if (err) throw new Error(err);
+  
+  console.log('Portfolio complete! Check out index.html to see the output!');
+});
+
+/*promptUser()
   .then(promptProject)
   .then(portfolioData => {
-    console.log(portfolioData);
-  });
+    //const pageHTML = generatePage(portfolioData);
+
+    fs.writeFile('./index.html', pageHTML, err => {
+      if (err) throw new Error(err);
+      
+      console.log('Portfolio complete! Check out index.html to see the output!');
+    });
+  });*/
