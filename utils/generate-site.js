@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const writeFile = FileContent => {
+const writeFile = fileContent => {
     return new Promise((resolve,reject) => {
         fs.writeFile('./dist/index.html', fileContent, err => {
             //if theres an error, reject the Promise and send the eroor to the Promise's .catch() method
